@@ -8,24 +8,32 @@ module.exports = (sequelize, DataTypes) => {
             },
             validate: {
                 len: {
-                    msg: "Le nom d'utilisateur doit avoir un nombre de caractères compris entre 8 et 40.",
-                    args: [8, 40]
+                    msg: "Le nom d'utilisateur doit avoir un nombre de caractères compris entre 4 et 40.",
+                    args: [4, 40]
                 }
             },
         },
-        password: {
-            type: DataTypes.STRING,
-            allowNull: false
-        },
-        email:{
+        email: {
             type:DataTypes.STRING,
             allowNull: false,
             validate : {
                 isEmail: true,
             }
+        },
+        password: {
+            type: DataTypes.STRING,
+            allowNull: false
         }
     }, {
-        onDelete: 'CASCADE'
+        onDelete: 'CASCADE',
+        defaultScope: {
+            attributes: { exclude: ['password'] }
+        },
+        scopes: {
+            withPassword: {
+                attributes: {}
+            }
+        }
     }
     );
 }
