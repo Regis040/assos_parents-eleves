@@ -14,6 +14,9 @@ app.get('/', (req, res) => {
 const userRouter = require('./routes/userRoutes')
 app.use('/users', userRouter)
 
+const articleRouter = require('./routes/articleRoutes')
+app.use(`/articles`, articleRouter)
+
 
 
 

@@ -1,9 +1,11 @@
 
 const UserModel = require('../models/userModel')
 const RoleModel = require('../models/roleModel')
+const ArticleModel = require(`../models/articleModel`)
 const { Sequelize, DataTypes } = require('sequelize');
 const bcrypt = require('bcrypt')
 const Users = require('./users')
+const Articles = require(`./articles`)
 
 
 const sequelize = new Sequelize(
@@ -18,9 +20,14 @@ const sequelize = new Sequelize(
 
 const Role = RoleModel(sequelize, DataTypes)
 const User = UserModel(sequelize, DataTypes)
+const Article = ArticleModel(sequelize, DataTypes)
 
 Role.hasMany(User)
 User.belongsTo(Role)
+
+User.hasMany(Article)
+Article.belongsTo(User)
+
 
 
 const setUsers = (User) => {
@@ -38,11 +45,22 @@ const setUsers = (User) => {
 const setRoles = (Role) => {
     return Promise.all([Role.create({ label: "superadmin" }), Role.create({ label: "admin" }), Role.create({ label: "edit" })])
 }
+const setArticles = (Article) => {
+    return Promise.all(Articles.map((element) => {
+        const newArticle = { ...element, id: null }
+        return Article.create(newArticle)
+            .then(() => { })
+            .catch((error) => {
+                console.log(error.message)
+            })
+    }))
+}
 
 sequelize.sync({ force: true })
     .then(async () => {
         await setRoles(Role)
         await setUsers(User)
+        await setArticles(Article)
     })
     .catch(error => {
         console.log(error)
