@@ -17,7 +17,8 @@ app.use('/users', userRouter)
 const articleRouter = require('./routes/articleRoutes')
 app.use(`/articles`, articleRouter)
 
-
+const commentRouter = require(`./routes/commentRoutes`)
+app.use(`/comments`, commentRouter)
 
 
 app.listen(port, () => {

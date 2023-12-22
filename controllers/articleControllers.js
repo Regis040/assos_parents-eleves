@@ -13,15 +13,15 @@ const findAllArticles = (req, res) => {
         })
 }
 
-const findAllArticlesRawSQL = (req, res) => {
-    sequelize.query("SELECT name, rating FROM articles LEFT JOIN reviews ON articles.id = comments.ArticleId", { type: QueryTypes.SELECT })
-        .then((results) => {
-            res.json(results)
-        })
-        .catch(error => {
-            res.status(500).json(error.message)
-        })
-}
+// const findAllArticlesRawSQL = (req, res) => {
+//     sequelize.query("SELECT name, rating FROM articles LEFT JOIN reviews ON articles.id = comments.ArticleId", { type: QueryTypes.SELECT })
+//         .then((results) => {
+//             res.json(results)
+//         })
+//         .catch(error => {
+//             res.status(500).json(error.message)
+//         })
+// }
 
 const findArticleByPk = (req, res) => {
     Article.findByPk((parseInt(req.params.id)))
@@ -61,7 +61,6 @@ const createArticle = (req, res) => {
         })
 }
 
-
 const updateArticle = (req, res) => {
     Article.findByPk(req.params.id)
         .then((result) => {
@@ -81,8 +80,6 @@ const updateArticle = (req, res) => {
             res.status(500).json({ message: 'Une erreur est survenue.', data: error.message })
         })
 }
-
-
 
 const deleteArticle = (req, res) => {
     // A. On vérifie que l'id passé en req.params.id renvoie bien une ligne de notre table.

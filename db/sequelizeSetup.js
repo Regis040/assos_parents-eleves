@@ -2,6 +2,7 @@
 const UserModel = require('../models/userModel')
 const RoleModel = require('../models/roleModel')
 const ArticleModel = require(`../models/articleModel`)
+const commentModel = require(`../models/commentModel`)
 const { Sequelize, DataTypes } = require('sequelize');
 const bcrypt = require('bcrypt')
 const Users = require('./users')
@@ -21,6 +22,7 @@ const sequelize = new Sequelize(
 const Role = RoleModel(sequelize, DataTypes)
 const User = UserModel(sequelize, DataTypes)
 const Article = ArticleModel(sequelize, DataTypes)
+const Comment = commentModel(sequelize, DataTypes)
 
 Role.hasMany(User)
 User.belongsTo(Role)
@@ -28,6 +30,11 @@ User.belongsTo(Role)
 User.hasMany(Article)
 Article.belongsTo(User)
 
+User.hasMany(Comment)
+Comment.belongsTo(User)
+
+Article.hasMany(Comment)
+Comment.belongsTo(Article)
 
 
 const setUsers = (User) => {
