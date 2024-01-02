@@ -1,10 +1,11 @@
-// const { Op } = require('sequelize')
+const { Op } = require('sequelize')
 const { UniqueConstraintError, ValidationError, QueryTypes } = require('sequelize')
-const { Article, User, Comment, sequelize } = require('../db/sequelizeSetup')
+const {  User, Article, Comment, sequelize } = require('../db/sequelizeSetup')
+
 
 const findAllArticles = (req, res) => {
     // paramètre optionnel qui permet d'ajouter les données relatives aux commentaires d'un coworking
-    Article.findAll({ include: [Comment, User] })
+    Article.findAll({ include: [Comment, User] }) 
         .then((results) => {
             res.json(results)
         })
@@ -13,15 +14,6 @@ const findAllArticles = (req, res) => {
         })
 }
 
-// const findAllArticlesRawSQL = (req, res) => {
-//     sequelize.query("SELECT name, rating FROM articles LEFT JOIN reviews ON articles.id = comments.ArticleId", { type: QueryTypes.SELECT })
-//         .then((results) => {
-//             res.json(results)
-//         })
-//         .catch(error => {
-//             res.status(500).json(error.message)
-//         })
-// }
 
 const findArticleByPk = (req, res) => {
     Article.findByPk((parseInt(req.params.id)))

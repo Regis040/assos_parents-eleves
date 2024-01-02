@@ -79,4 +79,4 @@ sequelize.authenticate()
     .catch(error => console.error(`Impossible de se connecter à la base de données ${error}`))
 
 
-module.exports = { User, Role, sequelize }
+module.exports = { User, Role, Article, Comment, sequelize }

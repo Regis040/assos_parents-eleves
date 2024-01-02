@@ -9,26 +9,11 @@ module.exports = (sequelize, DataTypes) => {
         },
         articletitle: {
             type: DataTypes.STRING,
-            allowNull: false,
-            unique: {
-                msg: "Le nom est déjà pris."
-            },
-            validate: {
-                len: {
-                    msg: "Le nom doit avoir un nombre de caractères compris entre 10 et 400.",
-                    args: [5, 100]
-                }
-            },
+            allowNull: false,          
         },
         articlebody: {
             type: DataTypes.STRING,
-            allowNull: false,
-                validate: {
-                     len: {
-                         msg: "Le nom doit avoir un nombre de caractères compris entre 10 et 400.",
-                        args: [10, 400]
-                     }
-            },
+            allowNull: false,             
         },
     }, {
         onDelete: 'CASCADE'
