@@ -19,9 +19,9 @@ const findArticleByPk = (req, res) => {
     Article.findByPk((parseInt(req.params.id)))
         .then((result) => {
             if (result) {
-                res.json({ message: 'Un coworking a été trouvé.', data: result })
+                res.json({ message: 'Un article a été trouvé.', data: result })
             } else {
-                res.status(404).json({ message: `Aucun coworking n'a été trouvé.` })
+                res.status(404).json({ message: `Aucun article n'a été trouvé.` })
             }
         })
         .catch((error) => {
@@ -39,13 +39,13 @@ const createArticle = (req, res) => {
 
             Article.create(newArticle)
                 .then((article) => {
-                    res.status(201).json({ message: 'Le coworking a bien été créé', data: coworking })
+                    res.status(201).json({ message: 'Lartcicle a bien été créé', data: article })
                 })
                 .catch((error) => {
                     if (error instanceof UniqueConstraintError || error instanceof ValidationError) {
                         return res.status(400).json({ message: error.message })
                     }
-                    res.status(500).json({ message: `Le coworking n'a pas pu être créé`, data: error.message })
+                    res.status(500).json({ message: `L'article n'a pas pu être créé`, data: error.message })
                 })
         })
         .catch(error => {
@@ -59,10 +59,10 @@ const updateArticle = (req, res) => {
             if (result) {
                 return result.update(req.body)
                     .then(() => {
-                        res.status(201).json({ message: 'Le coworking a bien été mis à jour.', data: result })
+                        res.status(201).json({ message: 'Le article a bien été mis à jour.', data: result })
                     })
             } else {
-                res.status(404).json({ message: `Aucun coworking à mettre à jour n'a été trouvé.` })
+                res.status(404).json({ message: `Aucun article à mettre à jour n'a été trouvé.` })
             }
         })
         .catch(error => {
@@ -82,11 +82,11 @@ const deleteArticle = (req, res) => {
                 return result.destroy()
                     // C. Si le coworking est bien supprimé, on affiche un message avec comme data le coworking récupéré dans le .findByPk()
                     .then((result) => {
-                        res.json({ mesage: `Le coworking a bien été supprimé.`, data: result })
+                        res.json({ mesage: `Le article a bien été supprimé.`, data: result })
                     })
             } else {
                 // B Si aucun coworking ne correspond à l'id alors on retourne une réponse à POSTMAN
-                res.status(404).json({ mesage: `Aucun coworking trouvé.` })
+                res.status(404).json({ mesage: `Aucun article trouvé.` })
             }
         })
         .catch((error) => {

@@ -55,11 +55,13 @@ const updateComment = (req, res) => {
 }
 
 const deleteComment = (req, res) => {
-    Review.findByPk(req.params.id)
+    Comment.findByPk(req.params.id)
         .then((result) => {
             if (result) {
+                console.log(1)
                 return result.destroy()
                     .then((result) => {
+                        console.log(2)
                         res.json({ mesage: `Le commentaire a bien été supprimé.`, data: result })
                     })
             } else {
