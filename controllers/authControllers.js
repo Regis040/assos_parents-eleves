@@ -26,7 +26,7 @@ const login = (req, res) => {
                     }
                     const token = jwt.sign({
                         data: result.username
-                    }, SECRET_KEY, { expiresIn: '10h' });
+                    }, SECRET_KEY, { expiresIn: '24h' });
 
                 
                     res.json({ message: `Login réussi`, data: token })

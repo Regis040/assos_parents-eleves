@@ -4,7 +4,7 @@ const {  User, Article, Comment, sequelize } = require('../db/sequelizeSetup')
 
 
 const findAllArticles = (req, res) => {
-    // paramètre optionnel qui permet d'ajouter les données relatives aux commentaires d'un coworking
+    
     Article.findAll({ include: [Comment, User] }) 
         .then((results) => {
             res.json(results)
