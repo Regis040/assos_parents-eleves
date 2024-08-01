@@ -1,5 +1,13 @@
 module.exports = (sequelize, DataTypes) => {
     return sequelize.define('User', {
+        name : {
+            type: DataTypes.STRING,
+            allowNull: false,                     
+        },
+        firstname : {
+            type: DataTypes.STRING,
+            allowNull: false,                     
+        },
         username: {
             type: DataTypes.STRING,
             allowNull: false,
@@ -22,6 +30,22 @@ module.exports = (sequelize, DataTypes) => {
         },
         password: {
             type: DataTypes.STRING,
+            allowNull: false
+        },
+        gender_kid:{
+            type: DataTypes.ENUM('fille', 'garcon'),
+            allowNull: false
+        },
+        firstname_kid:{
+            type:DataTypes.STRING,
+            allowNull: false
+        },
+        etablishment: {
+            type: DataTypes.ENUM('école Meyrie', 'école Petit prince', 'collége Jean-Mermoz', 'Lycée gaspard Proust'),
+            allowNull: false 
+        },
+        school_class:{
+            type:DataTypes.STRING,
             allowNull: false
         }
     }, {

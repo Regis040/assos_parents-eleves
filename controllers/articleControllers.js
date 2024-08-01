@@ -3,8 +3,7 @@ const { UniqueConstraintError, ValidationError, QueryTypes } = require('sequeliz
 const {  User, Article, Comment, sequelize } = require('../db/sequelizeSetup')
 
 
-const findAllArticles = (req, res) => {
-    
+const findAllArticles = (req, res) => {    
     Article.findAll({ include: [Comment, User] }) 
         .then((results) => {
             res.json(results)
@@ -39,7 +38,7 @@ const createArticle = (req, res) => {
 
             Article.create(newArticle)
                 .then((article) => {
-                    res.status(201).json({ message: 'Lartcicle a bien été créé', data: article })
+                    res.status(201).json({ message: 'Larticle a bien été créé', data: article })
                 })
                 .catch((error) => {
                     if (error instanceof UniqueConstraintError || error instanceof ValidationError) {
@@ -59,7 +58,7 @@ const updateArticle = (req, res) => {
             if (result) {
                 return result.update(req.body)
                     .then(() => {
-                        res.status(201).json({ message: 'Le article a bien été mis à jour.', data: result })
+                        res.status(201).json({ message: 'Larticle a bien été mis à jour.', data: result })
                     })
             } else {
                 res.status(404).json({ message: `Aucun article à mettre à jour n'a été trouvé.` })

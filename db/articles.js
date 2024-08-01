@@ -9,7 +9,7 @@ const articles = [
     {
         id: 2,
         articletitle: "Action locale",
-        articlebody: "Que pensez-vous de l'augmentataion de 25% de la mairie de Biscarrosse de la cantine. Quel solutions pouvons nous apporter ?",
+        articlebody: "Que pensez-vous de l'augmentation de 25%  de la cantine par la mairie de Biscarrosse. Quel solutions pouvons nous apporter ?",
         UserId: 2,
         created: new Date()
     },

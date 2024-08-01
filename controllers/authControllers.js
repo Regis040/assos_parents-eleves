@@ -27,7 +27,6 @@ const login = (req, res) => {
                     const token = jwt.sign({
                         data: result.username
                     }, SECRET_KEY, { expiresIn: '24h' });
-
                 
                     res.json({ message: `Login réussi`, data: token })
                 })
@@ -39,7 +38,6 @@ const login = (req, res) => {
             res.status(500).json({ data: error.message })
         })
 }
-
 
 const protect = (req, res, next) => {
     if (!req.headers.authorization) {
@@ -69,8 +67,8 @@ const restrict = (roleParam) => {
             .then(user => {
                 Role.findByPk(user.RoleId)
                     .then(role => {
-                                                                                         // role.label est le rôle issu du token
-                                                                                        // roleParam est le paramètre de la fonction restrict()
+                                                         // role.label est le rôle issu du token
+                                                         // roleParam est le paramètre de la fonction restrict()
                         if (rolesHierarchy[role.label].includes(roleParam)) {
                             next()
                         } else {
@@ -86,7 +84,6 @@ const restrict = (roleParam) => {
             })
     }
 }
-
 
 const restrictToOwnUser = (model) => {
     return (req, res, next) => {
