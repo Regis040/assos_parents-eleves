@@ -1,7 +1,7 @@
 const express = require('express')
 const router = express.Router()
 const { findAllComments, findCommentByPk, createComment, updateComment, deleteComment } = require('../controllers/commentControllers')
-const { protect, restrictToOwnUser } = require('../controllers/authControllers')
+const { protect, restrictToOwnUser, restrict } = require('../controllers/authControllers')
 const { Comment } = require('../db/sequelizeSetup')
 
 router
@@ -12,7 +12,7 @@ router
 router
     .route('/:id')
     .get(findCommentByPk)
-    .put(protect, restrictToOwnUser(Comment), updateComment)
-    .delete(protect, restrictToOwnUser(Comment), deleteComment)
+    .put(protect, restrict("admin"), updateComment)
+    .delete(protect, restrict("admin"), deleteComment)
 
 module.exports = router 
